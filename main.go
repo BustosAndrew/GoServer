@@ -12,16 +12,17 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/joho/godotenv"
+
+	// "github.com/joho/godotenv"
 	"github.com/sashabaranov/go-openai"
 	"github.com/twilio/twilio-go/twiml"
 )
 
 func main() {
-   err := godotenv.Load()
-   if err != nil {
-       log.Fatal("cannot retrieve env file")
-   }
+//    err := godotenv.Load()
+//    if err != nil {
+//        log.Fatal("cannot retrieve env file")
+//    }
    app := gin.Default()
    app.Any("/llm-websocket/:call_id", Retellwshandler)
    app.POST("/twilio-webhook/:agent_id", Twiliowebhookhandler) 
