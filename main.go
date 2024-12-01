@@ -19,14 +19,19 @@ import (
 )
 
 func main() {
+    port := os.Getenv("PORT")
+	if port == "" {
+		port = "8081" // Default port if not set
+	}
 //    err := godotenv.Load()
 //    if err != nil {
 //        log.Fatal("cannot retrieve env file")
 //    }
+//    gin.SetMode(gin.ReleaseMode)
    app := gin.Default()
    app.Any("/llm-websocket/:call_id", Retellwshandler)
    app.POST("/twilio-webhook/:agent_id", Twiliowebhookhandler) 
-   app.Run("localhost:8081")
+   app.Run(":" + port)
 }
 
 func GetRetellAISecretKey() string {
